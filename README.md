@@ -172,10 +172,11 @@ Há utilidade potencial no acompanhamento e em cotações seletivas, mas os dado
 ```bash
 python -m pip install -r requirements.txt
 python scripts/pipeline.py --zip data/ca-2026-01.zip --out resultados
+python scripts/verificar.py
 python scripts/visualizar.py
 ```
 
-O pipeline baixa o ZIP se ele não existir. Os microdados e tabelas locais gerados são ignorados no versionamento. Não publicar credenciais, tokens ou arquivos de configuração pessoal.
+O pipeline baixa o ZIP se ele não existir. A verificação gera o resumo público do ranking e o [registro de validação local](resultados/validacao_local.json): chaves, integridade referencial, cardinalidade dos joins, quantis, cobertura, aritmética dos cenários e sintaxe do notebook. Os microdados e tabelas locais gerados são ignorados no versionamento. Não publicar credenciais, tokens ou arquivos de configuração pessoal.
 
 ### Databricks
 
