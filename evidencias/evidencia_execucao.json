@@ -1,0 +1,54 @@
+{
+  "executado_em_utc": "2026-11-04T20:39:57.771982+00:00",
+  "ambiente": "databricks",
+  "prefixo": "workspace.psp2_abastecimento",
+  "volume": "/Volumes/workspace/psp2_abastecimento/arquivos",
+  "sha256_zip": "a2c95e5dfa324a9d7253d4e8d53022e0c08dcc5eb6f18551527ee9f29305c54c",
+  "tabelas": [
+    {
+      "tabela": "workspace.psp2_abastecimento.bronze_precos",
+      "linhas": 3789
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.dim_data",
+      "linhas": 116
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.dim_localidade",
+      "linhas": 17
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.dim_posto",
+      "linhas": 305
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.dim_produto",
+      "linhas": 1
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.fato_preco",
+      "linhas": 3789
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.indicadores_semanais",
+      "linhas": 380
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.resumo_localidades",
+      "linhas": 17
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.ranking_postos",
+      "linhas": 291
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.cenarios",
+      "linhas": 954
+    },
+    {
+      "tabela": "workspace.psp2_abastecimento.qualidade_atributos",
+      "linhas": 16
+    }
+  ],
+  "validacoes": "contagens, PK e FK aprovadas"
+}
