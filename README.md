@@ -5,7 +5,7 @@ Universidade de Brasília • Engenharia de Produção
 Professor: **André Luiz Marques Serrano**  
 Período analisado: **janeiro a junho de 2026** • Coleta: **04/11/2026**
 
-> **Situação da entrega:** pipeline executado e resultados verificados em Python local. Notebook de execução e persistência no Databricks disponível. A comprovação da execução na nuvem ainda está pendente; não se deve confundir resultados locais com evidência de tabelas Delta persistidas. Consulte [evidências](evidencias/README.md).
+> **Situação da entrega:** pipeline executado localmente e no Databricks. O [registro de execução na nuvem](evidencias/evidencia_execucao.json), de 04/11/2026 às 17h39 (Brasília), documenta 11 tabelas, 3.789 linhas na fato e validações de contagens, PK e FK aprovadas. A [captura da consulta SQL](evidencias/databricks_consulta.png) confirma 3.789 observações e preços entre R$ 5,39 e R$ 8,73. O hash da fonte coincide com a análise local. Consulte a [comprovação e seus limites](evidencias/README.md).
 
 ## Resumo executivo
 
@@ -78,6 +78,12 @@ O esquema estrela contém `fato_preco`, `dim_data`, `dim_localidade`, `dim_posto
 O ETL converte datas e decimais, normaliza CNPJ como texto, remove duplicatas exatas e interrompe o processamento se houver conflitos na chave natural. Valores inválidos são separados em quarentena. Uma faixa de R$ 2–15/litro funciona apenas como alerta de plausibilidade. Preço de compra não é imputado.
 
 No Databricks, o notebook cria `psp2_abastecimento.arquivos` como Volume no catálogo atual e persiste Bronze, dimensões, fato, qualidade, indicadores e cenários como tabelas Delta. Em reexecuções, sobrescreve somente as tabelas desse schema de projeto. Releitura, contagens, unicidade e integridade referencial são verificadas após a gravação. A coleta pode ser automática por URL ou por envio do ZIP oficial ao Volume se a Free Edition bloquear a saída de rede.
+
+### Evidência da persistência na nuvem
+
+A consulta SQL à tabela persistida retorna 3.789 observações, mínimo de R$ 5,39 e máximo de R$ 8,73. O catálogo exibe as 11 tabelas do projeto. [Registro completo da execução](evidencias/evidencia_execucao.json).
+
+![Consulta à fato e catálogo no Databricks](evidencias/databricks_consulta.png)
 
 ## 4. Qualidade dos dados
 
@@ -159,7 +165,7 @@ Há utilidade potencial no acompanhamento e em cotações seletivas, mas os dado
 
 ## 6. Viabilidade do MVP
 
-**Técnica:** o pipeline local foi executado; a arquitetura de nuvem usa notebook, Volume e Delta. A confirmação de execução cloud deve constar nas evidências, e não ser presumida a partir do código.
+**Técnica:** o pipeline foi executado localmente e no Databricks. O registro da nuvem confirma 11 tabelas no schema `workspace.psp2_abastecimento`, após gravação Delta e releitura com validação de contagens e chaves. O arquivo original e os resultados estão em Volume. O teste em uma nova sessão não foi confirmado separadamente.
 
 **Econômica:** o experimento foi desenhado para a Free Edition, sujeita a quotas e restrições. O custo de infraestrutura pode ser zero enquanto permanecer dentro dessas condições; isso não equivale a custo operacional total zero. Cenário gerencial ilustrativo: 1 hora semanal de atualização/conferência a R$ 50/h = R$ 50 por semana, sem incluir implantação ou deslocamento. Para 5.000 litros, o ponto de equilíbrio desse custo isolado seria R$ 0,01/litro. A taxa horária é hipotética, não pesquisada. Não se afirma que o potencial simulado será capturado.
 
@@ -186,7 +192,7 @@ Referência técnica: [limitações da Free Edition](https://docs.databricks.com
 
 ## 8. Autoavaliação técnica
 
-As cinco perguntas foram tratadas: Q1 e Q2 com indicadores semanais; Q3 com ranking e filtros de cobertura; Q4 por simulação declarada; Q5 por proposta de gestão. Não foram demonstradas economia realizada, desejabilidade ou causalidade. A execução na nuvem somente estará concluída quando houver as evidências correspondentes.
+As cinco perguntas foram tratadas: Q1 e Q2 com indicadores semanais; Q3 com ranking e filtros de cobertura; Q4 por simulação declarada; Q5 por proposta de gestão. Não foram demonstradas economia realizada, desejabilidade ou causalidade. A execução na nuvem está registrada em `evidencias/evidencia_execucao.json`, com contagens compatíveis com a análise local. A captura da consulta final e do catálogo confirma os totais; o reinício da sessão não foi confirmado separadamente, conforme explicitado nas evidências.
 
 As principais dificuldades foram interpretar a ausência estrutural do preço de compra, evitar peso indevido para postos com mais coletas, lidar com cobertura desigual e preparar persistência compatível com a Free Edition. O primeiro teste local também identificou um caso de quarentena vazia no pandas, corrigido antes da execução final.
 
@@ -212,5 +218,6 @@ evidencias/               estado e comprovação da execução cloud
 - [x] Modelo, catálogo e linhagem documentados.
 - [x] Qualidade por atributo e análise executadas localmente.
 - [x] Resultados negativos e cenários hipotéticos explicitados.
-- [ ] Execução Databricks, persistência e evidências verificadas.
+- [x] Execução Databricks e persistência registradas; contagens e hash conferidos.
+- [x] Captura da consulta SQL, catálogo e arquivos no Volume adicionada às evidências.
 - [ ] Revisão final do aluno e entrega do link no ambiente da disciplina.
