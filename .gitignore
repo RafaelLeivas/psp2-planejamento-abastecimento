@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+data/
+*.zip
+resultados/bronze_recorte.csv
+resultados/dim_posto.csv
+resultados/dim_data.csv
+resultados/dim_produto.csv
+resultados/dim_localidade.csv
+resultados/fato_preco.csv
+resultados/ranking_postos.csv
+resultados/quarentena.csv
+resultados/conflitos_chave.csv
