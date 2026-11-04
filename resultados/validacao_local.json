@@ -1,0 +1,28 @@
+{
+  "status": "aprovado",
+  "ambiente": "local_python",
+  "verificado_em_utc": "2026-11-04T20:23:46.678453+00:00",
+  "python": "3.12.14",
+  "pandas": "3.0.1",
+  "numpy": "2.3.5",
+  "contagens": {
+    "fato_preco": 3789,
+    "dim_data": 116,
+    "dim_posto": 305,
+    "dim_localidade": 17,
+    "dim_produto": 1
+  },
+  "municipio_semanas_analise": 318,
+  "cenarios": 954,
+  "postos_ranking_elegiveis": 104,
+  "verificacoes": [
+    "unicidade de PK",
+    "FK sem órfãos",
+    "joins sem multiplicação da fato",
+    "ordem dos quantis",
+    "filtros de cobertura",
+    "aritmética dos cenários",
+    "sintaxe das células Python do notebook"
+  ],
+  "limite": "Não comprova execução Spark/Delta ou persistência no Databricks."
+}
